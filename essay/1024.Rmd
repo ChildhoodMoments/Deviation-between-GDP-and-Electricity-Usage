@@ -1,0 +1,15 @@
+---
+title: An Empirical Study on the Deviation between Electricity Consumption and GDP
+  Growth in Anhui Provinc
+author: "Lizhao"
+date: '2022-10-24'
+output:
+  pdf_document
+---
+
+### Abstract 
+
+Today, energy use is closely related to economic development, and electricity is an important engine driving economic development for cities that rely on traditional industries. Combining the data of electricity consumption and total output value, through the *Logarithmic Mean Divisia Index Method (LMDI)*, we can decompose the growth rate of power consumption into intensity effects, structural effects, and output effects. These effects will reflect the phenomena that appear in industrial development, and for regions that are preparing to carry out industrial reform, they can provide valuable suggestions for the overall economic development in the future.
+
+Anhui, an inland province in China. Due to its large coal and ore reserves, it has several industrial cities, mainly engaged in thermal power generation and metal manufacturing. With the reduction of mineral reserves, the internal cycle of the previous high-yield power (coal power generation) and high power consumption (metal processing) is no longer stable, and it is imperative to adjust the original industrial structure. Since 2019, the economic growth rate of Anhui Province has slowed down, and the use of electricity has also reflected the deviation from the growth rate of GDP. The study of electricity consumption has positive significance for future economic development.
+

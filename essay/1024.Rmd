@@ -13,3 +13,345 @@ Today, energy use is closely related to economic development, and electricity is
 
 Anhui, an inland province in China. Due to its large coal and ore reserves, it has several industrial cities, mainly engaged in thermal power generation and metal manufacturing. With the reduction of mineral reserves, the internal cycle of the previous high-yield power (coal power generation) and high power consumption (metal processing) is no longer stable, and it is imperative to adjust the original industrial structure. Since 2019, the economic growth rate of Anhui Province has slowed down, and the use of electricity has also reflected the deviation from the growth rate of GDP. The study of electricity consumption has positive significance for future economic development.
 
+
+
+### Chapter1 Research background and the current research status
+#### (I) Background
+Since the last century, the relationship between energy consumption and industrial development has become extremely close. For some industrialized regions in China, the most important energy source is electricity. Because of its connection with industrial production, electricity use also has an important relationship with economic development. Previously, experts and scholars from various countries have conducted long-term and in-depth studies on the correlation between power consumption and economic growth. Hwang$(1984)^{[1]}$, Gum(1992)$^{[2]}$ and Mashi$(1997)^{[3]}$ were among the earliest scholars to study this subject. They used Granger Causality Test$(1969)^{[4]}$ to test the level value of the time series according to the sample data of different countries, or the same series of the same country but different sample intervals, got different conclusions. With the deepening of research, the research methods between power consumption and economy are constantly improved, mainly econometric analysis and decomposition analysis.
+
+#### (II) Analysis of Econometric Methods
+
+In recent years, more and more various econometric methods have been widely used in related research. Soytas$(2003)^{[5]}$ used 16 countries as the research object to analyze the relationship between energy consumption and economic growth. The results of cointegration analysis showed that the two-time series values in all countries are first-order single-integration, and there is a co-integration relationship. In addition to economic growth, more and more factors have been proved to be explanatory variables of electricity growth. Lariviere$(1999)^{[6]}$ found that population, temperature, and other factors have important influences on the electricity consumption of major cities in Canada. Steenhof$(2006)^{[7]}$ analyzed the power consumption of China’s industrial sector from 1998 to 2002 and believed that technological progress was an important influencing factor. Cui$(2013)^{[8]}$ used the principal component analysis method to quantitatively analyze that Chongqing is the main influencing factor of electricity consumption as macroeconomic factors, residents’ demand, and climate. Yu, Lin$(2015)^{[9]}$ used partial least squares regression to predict the electricity demand in Shandong Province. After taking into account socio-economic development, industrial structure adjustment, urbanization, and consumer prices, the results showed that the most important factor for the increase in electricity demand is the development of the secondary industry, the increase of the total population, and the growth of GDP.
+
+
+#### (III) Decomposition Analysis
+
+In the process of the research department on power consumption, scholars have developed various structural decomposition analysis methods to decompose the impact of each element on power demand. When Steenhof$(2006)^{[7]}$ decomposed and analyzed the electricity consumption of China’s industrial sectors, it was confirmed that changes in the industrial structure, energy transfer, and improvement in electricity efficiency are the main factors that cause changes in electricity consumption per unit of output. Ma, Shen$(2007)^{[10]}$ used the factor decomposition method to quantitatively study the impact of economic growth, structural changes, and changes in power consumption coefficients on China’s power consumption. In addition, Ang$ (2004)^{[11]}$ proposed the specific decomposition step of the logarithmic average Dirichlet index method (LMDI), which decomposes multiple factors at the same time without generating residuals, and is not restricted by zero and negative values. It can be applied to any case, and it is currently a relatively good structural decomposition analysis method. 
+
+
+### Chapter2 Analysis of Characteristics of Economic Growth and Electricity Consumption in Anhui Province
+
+#### (I) Anhui Province Background Information
+Anhui is a inland province of the People’s Republic of China, part of the East China region. Natural resources of Anhui include iron in Ma'anshan, coal in Huainan, and copper in Tongling. There are industries related to these natural resources (e.g. steel industry at Ma'anshan)$^{[11]}$. Compared to its more prosperous neighbours to the east, Zhejiang Province and Jiangsu Province, Anhui has lagged markedly behind in economic development, with a GDP per capita around half of those two provinces in 2017 rapidly improved from 1/3 of those two provinces in 2010$^{[12]}$. Anhui Province has a relatively complete variety of minerals and abundant reserves. Over the past few years, coal mines in Anhui have been mainly used for thermal power generation and to send electricity to industrial cities such as Ma'anshan.
+
+
+#### (II) Anhui Economic Development
+
+This article uses real GDP to measure the annual economic development of Anhui province, and GDP index to calculate real GDP. We use the data of 1990 as the base year, and its GDP Index is 100. The real GDP is calculated as follows:
+$$RealGDP_t=  NominalGDP_{1990}*\prod_{t=1991}^TGDPIndex_t$$
+While calculating the GDP of the whole society, I introduced the GDP of each (subdivided) industry, so as to see the contribution of each industry to economic development and energy consumption more clearly. According to the [**Classification of China’s National Economic Industries**](https://www.china-data-online.com/info/hyfl.asp), the Chinese three major industries are classified as follows: The primary industry refers to agriculture, forestry, animal husbandry, and fishery (excluding agriculture, forestry, animal husbandry, and fishery service industries). The secondary industry refers to the mining industry (excluding mining auxiliary activities), manufacturing industry (excluding metal products, machinery and equipment repair industry), electricity, heat, gas and water production and supply industry, and construction industry. The tertiary industry is the service industry, which refers to industries other than the primary industry and the secondary industry.
+
+In general, the main industries in Anhui Province in the past, such as mineral mining, thermal power generation, metal smelting, etc., belonged to the secondary industry, and we will see this situation in the follow-up.
+
+##### (1) GDP and its composition
+```{r setup, include=FALSE}
+library(tidyverse)
+library(lubridate)
+
+gdp_data <- read.csv("D:/03狠活/IO/data/gdp_data.csv", fileEncoding = "UTF-8-BOM" )
+#mutate variable for calculate total GDP growth rate and other industries GDP growth rate  https://bbs.pinggu.org/thread-2488013-1-1.html
+
+#gdp_data <-  gdp_data %>% mutate(growth = diff(gdp_data$GDP)/gdp_data$GDP[-length(gdp_data$GDP)])
+
+GDP_growth_rate <- c(NA, (diff(gdp_data$GDP)/gdp_data$GDP[-length(gdp_data$GDP)])*100)
+
+primary_growth_rate <- c(NA, (diff(gdp_data$primary_industry)/gdp_data$primary_industry[-length(gdp_data$primary_industry)]) *100)
+
+secondary_growth_rate <- c(NA, (diff(gdp_data$secondary_industry)/gdp_data$secondary_industry[-length(gdp_data$secondary_industry)])*100)
+
+tertiary_growth_rate <- c(NA, (diff(gdp_data$tertiary_industry)/gdp_data$tertiary_industry[-length(gdp_data$tertiary_industry)])*100)
+
+
+```
+At first, I plot the real GDP of Anhui Province, 
+
+```{r total gdp plot, include=FALSE}
+# total gdp plot
+real_gdp_plot <- ggplot(data = gdp_data) +
+  geom_bar(mapping = aes(x = year, y = GDP), stat = 'identity')+
+  scale_x_continuous(breaks = unique(gdp_data$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  # https://community.rstudio.com/t/x-axis-labels-overlap-want-to-rotate-labels-45/63800/2
+  theme(plot.title = element_text(hjust = 0.5))+
+  # https://stackoverflow.com/questions/40675778/center-plot-title-in-ggplot2
+  labs(title = "Figure 2_1: Anhui Province Real GDP from 1990-2018")+ 
+  labs(x = 'Year', y = '(100 million yuan)')+
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+
+
+# add GDP growth into table and create plot 
+gdp_data['gdp_growth'] = GDP_growth_rate
+gdp_growth_plot <- ggplot(data = gdp_data) + 
+  geom_line(mapping = aes(x = year, y = gdp_data$gdp_growth)) +
+  scale_x_continuous(breaks = unique(gdp_data$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 2_2: Anhui Province Real GDP Growth Rate from 1991-2018", )+ 
+  labs(x = 'Year', y = 'percent')+
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+  
+```
+```{r show_total_gdp_plot, echo=FALSE, warning=FALSE, fig.height=3, fig.width=5.5, fig.align='center'}
+plot(real_gdp_plot)
+plot(gdp_growth_plot)
+```
+
+From Figure 2-1 and Figure 2-2, we can be sure that the GDP of Anhui Province has increased several times within 30 years, and at the same time, the economic growth rate has been maintained at around 10% all year round. But compared with the huge population base of Anhui Province and the low GDP level in the past, this is not very rare. On the other hand, we can see that before the 21st century, the GDP of Anhui Province experienced a huge growth (1992-1993), and then its growth rate has been declining. Then from 2000 to 2008, the growth rate returned to the previous high speed state, but after 2010, we can clearly see that the growth rate continued to slow down. 
+
+
+```{r major industries growt rate, include=FALSE}
+
+# add industries growth rate
+gdp_data['primary_growth_rate'] = primary_growth_rate
+gdp_data['secondary_growth_rate'] = secondary_growth_rate
+gdp_data['tertiary_growth_rate'] = tertiary_growth_rate
+
+# melt data frame into long format, in order to plot industries' gdp together https://www.statology.org/plot-multiple-columns-in-r/
+library(reshape2)
+industry_gdp_table <- data.frame(year = gdp_data$year, 
+                            primary_gdp = gdp_data$primary_industry,
+                            secondary_gdp = gdp_data$secondary_industry, 
+                            tertiary_gdp = gdp_data$tertiary_industry)
+
+industry_gdp_table <- melt(industry_gdp_table, id.vars = 'year', variable.name = 'industry_gdp')
+
+industry_plot <-  ggplot(data = industry_gdp_table)+
+  geom_bar(mapping = aes(x = year, y = value, fill = industry_gdp), stat = 'identity', position = 'dodge', alpha = 0.55)+
+   scale_x_continuous(breaks = unique(industry_gdp_table$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 2_3: Anhui Province Major Industry GDP Value from 1991-2018", )+ 
+  labs(x = 'Year', y = '(100 million Yuan)')+
+  # https://statisticsglobe.com/change-font-size-of-ggplot2-plot-in-r-axis-text-main-title-legend
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+  
+
+# melt data frame into long format, in order to plot industries' gdp growth rate together
+industry_growth_rate_table = data.frame(year = gdp_data$year, primary_growth_rate = gdp_data$primary_growth_rate,
+                                        secondary_growth_rate = gdp_data$secondary_growth_rate,
+                                        tertiary_growth_rate = gdp_data$tertiary_growth_rate)
+
+industry_growth_rate_table <-  melt(industry_growth_rate_table, id.vars = 'year', variable.name = 'industry_growth_rate')
+
+industry_growth_plot <-  ggplot(data = industry_growth_rate_table)+
+  geom_line(mapping = aes(x = year, y = value, color = industry_growth_rate), alpha = 0.55)+
+   scale_x_continuous(breaks = unique(industry_growth_rate_table$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 2_4: Anhui Province Major Industry GDP Growth Rate from 1991-2018", )+ 
+  labs(x = 'Year', y = '(percent)')+
+  # https://statisticsglobe.com/change-font-size-of-ggplot2-plot-in-r-axis-text-main-title-legend
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+  
+
+
+
+```
+
+```{r industry gdp plot, echo=FALSE, warning=FALSE, fig.height=3, fig.width=5.5, fig.align='center'}
+industry_plot
+industry_growth_plot
+```
+
+From Figures 2-3 and 2-4, we can see that the main driving force for Anhui's GDP growth is the rapid development of the secondary industry. After 2000, the GDP output value of the secondary industry doubled several times within ten years, and continued to account for the vast majority of GDP. In contrast, the GDP of the primary industry has been maintained at a relatively low range, and the tertiary industry has maintained a stable growth rate until around 2008, but then its growth rate began to accelerate and its output value gradually increased.
+
+At the same time, the GDP growth rate of the secondary industry began to slow down after 2010, which coincided with the previous slowdown in the GDP growth rate of Anhui Province, which shows that Anhui’s GDP still relies on the secondary industry. Although the growth rate of the tertiary industry is accelerating, difficulties are still encountered in the process of industrial transformation, and it is impossible to completely get rid of the past economic development model.
+
+##### (2) Why Electricity?
+The main research core of this article is the problem of the deviation between electricity use and economic growth. Many readers will wonder why other energy sources, such as natural gas and coal, are not considered. This chapter will try to explain as much as possible that electricity, as an energy source for the development of major industries in Anhui Province, has an important relationship with economic growth.
+
+In Table 2-1, I listed the types and quantities of major energy consumption in Anhui Province in recent years. In this table, except natural gas is measured by 100 million cubic meters and electricity is measured by 100 million kilowatt-hours, the remaining fuels are measured by 10,000 tons. This is just a part of the data, the full data is here:
+
+```{r setup for energy consum table, include=FALSE}
+library(knitr)
+energy_data <- read.csv("D:/03狠活/IO/data/energy_usage.csv", fileEncoding = "UTF-8-BOM")
+
+# select 1995, 2000, 2005, 2010, 2015, 2019 Anhui energy usage and make a chart
+
+sample_usage_report <- energy_data[energy_data$year %in% c(1995,2000,2005,2010,2015,2019), ]
+```
+
+```{r show usage table, echo=FALSE}
+library(knitr)
+kable(sample_usage_report, index = FALSE, caption = 'Part of Main Energy Consumption in Anhui', align = 'c')
+```
+
+We can see from the table that the main forms of energy consumption in Anhui Province are mainly coal and electricity. As Anhui is a major coal-producing area, Anhui's coal consumption has always been at the forefront of the country. However, the consumption structure of coal has remained stable. According to statistics from the Anhui Provincial Energy Bureau in 2019, more than 60% of coal consumption in the province is used for thermal power generation all year round. This figure will be higher in the past due to energy structure reform measures over the years
+According to statistics from the Anhui Provincial Energy Bureau in 2019, more than 60% of coal consumption in the province is used for thermal power generation all year round, and directly converted into electricity through pithead power plant and used again. This figure will be higher in the past due to energy structure reform measures over the years$^{[12]}$. On the other hand, in addition to the fact that the consumption of coal mines has always been higher than that of other fossil fuels, the energy consumption structure of Anhui Province has also been continuously upgraded in recent years, which is confirmed by the rapid growth of natural gas use. In general, we have reasons to believe that the main energy consumption in Anhui Province is electricity, because it occupies an important proportion of the main energy consumption, which is also in line with the consumption characteristics of traditional industries such as metallurgy in Anhui Province.
+
+##### (3) Electricity Usage
+```{r electricity usage plot setup, include=FALSE}
+electricity_usage_plot <- ggplot(data = energy_data)+
+  geom_bar(mapping = aes(x = year, y = energy_data$Electricity), stat = 'identity')+  scale_x_continuous(breaks = unique(energy_data$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 2_5: Anhui Province Electricity Usage from 1995-2021")+ 
+  labs(x = 'Year', y = '(billion kWh)')+
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+
+# calculate electricity usage growth rate
+electricty_growth_rate <- c(NA, (diff(energy_data$Electricity)/energy_data$Electricity[-length(energy_data$Electricity)])*100)
+energy_data['Electricity_growth_rate'] = electricty_growth_rate
+
+# create a new dataframe to compare growth rate for GDP and electricity usage
+library(dplyr)
+#GDP_growth_rate_table <- select(gdp_data,'year', 'gdp_growth', 'primary_growth_rate', 'secondary_growth_rate', 'tertiary_growth_rate')
+GDP_growth_rate_table <- select(gdp_data,'year', 'gdp_growth', )
+
+
+electricty_growth_rate_table <- select(energy_data, 'year', 'Electricity_growth_rate')
+## merge together based on year, since some years data are lack
+
+growth_rate_compare = merge(electricty_growth_rate_table, GDP_growth_rate_table, by = 'year', all = FALSE)
+
+#reshape the table and create the line chart
+ growth_rate_compare<- melt(growth_rate_compare, id.vars = 'year', variable.name = 'growth_rate')
+
+ 
+growth__compare_plot <-  ggplot(data = growth_rate_compare)+
+  geom_line(mapping = aes(x = year, y = value, color = growth_rate), alpha = 0.55)+
+   scale_x_continuous(breaks = unique(growth_rate_compare$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 2_7:  Growth Rate Comparison from 1995-2018", )+ 
+  labs(x = 'Year', y = '(percent)')+
+  # https://statisticsglobe.com/change-font-size-of-ggplot2-plot-in-r-axis-text-main-title-legend
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+  
+
+ 
+
+
+```
+
+```{r show growth rate plot, echo=FALSE, warning=FALSE, fig.height=3, fig.width=5.5, fig.align='center'}
+growth__compare_plot
+```
+In order to facilitate the comparison of the relationship between electricity consumption and economic development, we use the growth rate of the two to measure. Figure 2-5 clearly shows the relationship between electricity use and GDP growth since 1996. As can be seen from the figure, before 2002, there was a certain deviation between the growth rate of electricity consumption and the growth rate of GDP, but the growth rates of the two have been close to each other. After 2002, the values and trends of the two started to be very similar until 2012. After 2012, we can clearly find that there is a relatively obvious deviation between the two. From 2012 to 2015, the GDP growth rate continued to decline, but the electricity usage increased first and then declined rapidly. After 2017, electricity usage began to fluctuate continuously, while GDP growth rate declined slowly.
+
+##### The relationship between electricity use and GDP growth
+From the previous chart analysis, the author wondered why the growth rate of electricity consumption in Anhui Province no longer continued to slow down with the growth rate of GDP? Since 2010, the growth rate of GDP has slowed down, and the growth rate of the advantageous industries (secondary industry) in Anhui Province has also slowed down (see Figure 2-4). But what are the reasons for this deviation in growth rate after 2017? Is it due to the industrial transformation of Anhui Province? After the industrial transformation, the electric power can no longer reflect the development status of the leading industry at this stage? In the context of slowing GDP growth, is economic development and energy demand no longer as closely linked as before?
+
+In the following sections, this paper will conduct characteristic analysis and quantitative analysis of economic growth and electricity consumption in an attempt to explain these raised questions.
+
+
+
+
+
+
+
+
+
+### Chapter3 Research on the Mechanism of Electricity Consumption Deviation from Economic Growth
+#### (I)Indicator introduction
+We first introduce some variables, they are Electricity consumption elasticity coefficient (denoted by $E$), Electricity consumption per unit output value, They will be used multiple times later.
+
+###### (1) Electricity consumption elasticity coefficient
+The electricity consumption elasticity coefficient (denoted by $E$) is the ratio of the growth rate of electricity usage to that of GDP in a certain period, which can be used to measure the relationship between power consumption and economic development. It is defined in Equation 3.1, where Y represents GDP in year t and EC represents electricity consumption in year t
+```{r include=FALSE}
+# https://rpubs.com/Chunkai/Mathematical-Formula-in-R-Markdown
+# https://blog.csdn.net/KitKat09/article/details/89162216#:~:text=%E5%9C%A8Markdown%E4%B8%AD%E4%BD%BF%E7%94%A8%20L,%E7%9A%84%E5%B8%A6%E7%BC%96%E5%8F%B7%E7%9A%84%E5%85%AC%E5%BC%8F%E3%80%82
+```
+
+$$E_t = \frac{(\Delta EC_t/ EC_t)}{(\Delta Y_t/Y_t)} \tag{eq 3.1}$$
+Its economic meaning is that when E is less than 1, equal to 1, or greater than 1, it reflects that the growth rate of power consumption is less than, equal to, and greater than the regional economic growth rate, respectively.
+
+##### (2) Electricity consumption per unit output value
+Electricity consumption per unit of output value (denoted by $EP$) refers to the electric energy consumed per unit of real GDP(denoted by $Y$). It reflects the power utilization efficiency of a region, and the unit is kWh/yuan. The lower the electricity consumption per unit of output value, the higher the electricity efficiency. It is defined by Equation 3.2
+
+$$ EP_t = \frac{EC_t}{Y_t}     \tag{eq 3.2}$$
+####(II) Factors affecting the growth rate of electricity consumption
+#####(1) The growth rate of electricity consumption
+In Equation 3.3, we introduce the growth rate of electricity consumption (denoted as $g^{EC}_t$), and the growth rate of GDP (denoted as $g^y_t$ for year t)to illustrate the relationship between the growth rate of electricity consumption, the growth rate of electricity consumption per unit of output value(denoted as $g^{EP}_t$), and the growth rate of GDP. Equation 3.3 shows that the GDP growth rate and the growth rate of electricity consumption per unit of output value jointly determine the size of the growth rate of electricity consumption. 
+
+$$
+\begin{split}
+g^{EC}_t 
+ & =\frac{EC_t - EC_{t-1}}{EC_{t-1}} =  \frac{Y_t*EP_t - Y_{t-1}*EP_{t-1}}{Y_{t-1}*EP_{t-1}}\\
+ & =\frac{Y_{t-1}*(1+g^y_t)*EP_{t-1}*(1+g^{EP}_{t})-Y_{t-1}*EP_{t-1}}{Y_{t-1}*EP_{t-1}}\\
+ & = (1 + g_t^y) *(1 + g_t^{EP}) - 1 \\
+ & = g_t^y + g_t^{EP} + g_t^y * g_t^{EP}
+\end{split} \tag{eq 3.3}
+$$ 
+
+Combine equation 3.1, We can derive equation 3.4 that: 
+$$ 
+\begin{split} E_t = & \frac{(\Delta EC_t/ EC_t)}{(\Delta Y_t/Y_t)} = \frac{g_t^{EC}}{g_t^y} \\
+& = 1  + g_t^{EP} + \frac{g_t^{EP}}{g_t^y}  \end{split} \tag{eq 3.4}
+$$
+Equation 3.4 describes the quantity relationship between the elasticity coefficient of electricity consumption ($E_t$), the growth rate of electricity consumption ($g_t^{EP}$), and the growth rate of GDP ($g_t^Y$). If the electricity consumption per unit of output value remains unchanged ($\Delta EP_t=0$ ) and the rate of increase in electricity consumption per unit of output value is zero ($g_t^{EP}=0$), then the rate of increase in electricity consumption is equal to the rate of increase in GDP ($g_t^{EC}= g_t^y$), and the elasticity coefficient is 1 ($E_t=1$). 
+
+Under normal circumstances, when $g_t^Y$ is greater than 0, real GDP keeps increasing, but as $g_t^{EP}$ decreases to a negative number, $g_t^{EC}$ will appear to be less than $g_t^Y$. When $g_t^{EP}$ is negative and very small, $g_t^{EC}$ will deviate downward from $g_t^Y$. When enough deviation occurs, the two may have opposite trends, as shown in Figure 2-7. This explanation is of great significance to our subsequent research, and it is the core content of subsequent research.
+
+
+#####(2) Electricity consumption per unit output value
+The electricity consumption per unit of output value is a measure of the intensity of electricity consumption, which reflects the efficiency of electricity utilization in the process of economic growth. The lower the electricity consumption per unit of output value, the higher the electricity usage efficiency, and vice versa, the lower the electricity usage efficiency. When the electricity consumption per unit of output value shows a downward trend, the electricity elasticity coefficient is less than 1, otherwise it is greater than 1.
+
+Regarding the factors that affect the change of electricity consumption per unit of output value, Steenhof (2006)$^{[12]}$ used the structural decomposition method to analyze the electricity consumption of China's industrial sector and found that, changes in industrial structure, energy transfer and the improvement of electricity efficiency are the main factors that change the electricity consumption per unit of output value.
+
+Let $EC_i$ represent the electricity consumption of the $i$th industry sector, and $Y_i$ represent the output value of the $i$th industry sector, then the electricity consumption per unit output value of the $t$th year $EP_t$ can be expressed as:
+
+$$EP_t =  \frac{EC_t}{Y_t} = \frac{\sum_{i=1}^nEC_{it}}{Y_t} = \frac{\sum_{i=1}^nY_{it}*EP_{it}}{Y_t} = \sum_{i=1}^nEP_{it}*S_{it} \tag{eq 3.5}$$
+$S_{it}$ represents the proportion of the output value of the $i$th industrial sector in the $i$th year, which is a variable to measure the industrial structure; $EP_{it}$ represents the electricity consumption per unit output value of the $i$th industrial sector in the $t$th year.
+
+Equation (3.5) shows that the electricity consumption per unit output value is the weighted average of the electricity consumption per unit output value of the industrial sector, and the weight is the proportion of the output value of the industrial sector. Therefore, the electricity consumption per unit output value is jointly affected by the electricity consumption per unit output value of the industrial sector and the output value of the industrial sector, that is, the industrial structure. The author refers to the influence of electricity consumption per unit output value of industrial sectors as efficiency factors, and the proportion of industrial sector output value as structural factors. 
+
+Changes in the industrial structure affect the electricity consumption per unit of output value and change the growth rate of electricity consumption, thereby causing the growth rate of electricity consumption to deviate from the GDP growth rate.
+On the other hand, the size of the electricity consumption per unit output value of the industrial sector directly affects the size of the electricity consumption per unit output value of the whole industry.
+
+
+
+
+
+
+
+### Chapter4 Econometric Model Method Analysis
+In this chapter, I analyze the relationship between the output value of each industry and electricity consumption. Then, according to its connection, the time series data is used to build a model to estimate the specific influence degree of electricity consumption growth rate deviating from GDP growth rate caused by changes in industrial structure.
+
+#### (I) The relationship between GDP and energy
+##### (1) GDP and various energy sources relation
+```{r import data set, include=FALSE}
+energy_data <- read.csv("D:/03狠活/IO/data/energy_usage.csv", fileEncoding = "UTF-8-BOM")
+
+
+
+# calculate different energy usage growth rate which listed in energy_data
+# https://bbs.pinggu.org/thread-6713399-2-1.html
+
+len_col_energy_data <- dim(energy_data)[2]
+for (i in 2: len_col_energy_data){
+  energy_data[,i] <-c(NA, 100*(diff(energy_data[,i])/energy_data[,i][-length(energy_data[,i])]))
+} 
+
+energy_growth_rate <- energy_data
+
+gdp_growth_rate <- select(gdp_data, 'year', 'gdp_growth')
+
+energy_growth_rate_compare = merge(energy_growth_rate, gdp_growth_rate, by = 'year', all = FALSE)
+
+# calculate correlation matrix
+# https://stackoverflow.com/questions/7445639/dealing-with-missing-values-for-correlations-calculation
+
+energy_correlation_matrix = data.frame(cor(energy_growth_rate_compare, use = "pairwise.complete.obs")%>% round(2))
+
+```
+First of all, this paper analyzes the correlation between GDP and various energy sources. For the convenience of comparison, this paper focuses on analyzing the relationship between their respective growth rates. Although some values are missing, it does not affect the final comparison result.
+
+```{r show energy growth rate correlation matrix with gdp, echo = FALSE, warning=FALSE}
+library(knitr)
+kable(energy_correlation_matrix, index = FALSE, caption = 'energy growth rate correlation with gdp growth rate', align = 'c')
+
+```
+

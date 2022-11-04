@@ -9,7 +9,7 @@ output:
 
 ### Abstract 
 
-Today, energy use is closely related to economic development, and electricity is an important engine driving economic development for cities that rely on traditional industries. Combining the data of electricity consumption and total output value, through the *Logarithmic Mean Divisia Index Method (LMDI)*, we can decompose the growth rate of power consumption into intensity effects, structural effects, and output effects. These effects will reflect the phenomena that appear in industrial development, and for regions that are preparing to carry out industrial reform, they can provide valuable suggestions for the overall economic development in the future.
+Today, energy use is closely related to economic development, and electricity is an important engine driving economic development for cities that rely on traditional industries. Combining the data of electricity consumption and total output value, through the *Logarithmic Mean Divisia Index Method (LMDI)*, we can decompose the growth rate of power consumption into intensity effect, structure effect, and output effect. These effects will reflect the phenomena that appear in industrial development, and for regions that are preparing to carry out industrial reform, they can provide valuable suggestions for the overall economic development in the future.
 
 Anhui, an inland province in China. Due to its large coal and ore reserves, it has several industrial cities, mainly engaged in thermal power generation and metal manufacturing. With the reduction of mineral reserves, the internal cycle of the previous high-yield power (coal power generation) and high power consumption (metal processing) is no longer stable, and it is imperative to adjust the original industrial structure. Since 2019, the economic growth rate of Anhui Province has slowed down, and the use of electricity has also reflected the deviation from the growth rate of GDP. The study of electricity consumption has positive significance for future economic development.
 
@@ -194,7 +194,7 @@ electricity_usage_plot <- ggplot(data = energy_data)+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
   theme(plot.title = element_text(hjust = 0.5))+
   labs(title = "Figure 2_5: Anhui Province Electricity Usage from 1995-2021")+ 
-  labs(x = 'Year', y = '(billion kWh)')+
+  labs(x = 'Year', y = '(100 Million kWh)')+
   theme(plot.title = element_text(size=7.5))+
   theme(axis.text = element_text(size = 5.5))+
   theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
@@ -241,7 +241,7 @@ growth__compare_plot
 ```
 In order to facilitate the comparison of the relationship between electricity consumption and economic development, we use the growth rate of the two to measure. Figure 2-5 clearly shows the relationship between electricity use and GDP growth since 1996. As can be seen from the figure, before 2002, there was a certain deviation between the growth rate of electricity consumption and the growth rate of GDP, but the growth rates of the two have been close to each other. After 2002, the values and trends of the two started to be very similar until 2012. After 2012, we can clearly find that there is a relatively obvious deviation between the two. From 2012 to 2015, the GDP growth rate continued to decline, but the electricity usage increased first and then declined rapidly. After 2017, electricity usage began to fluctuate continuously, while GDP growth rate declined slowly.
 
-##### The relationship between electricity use and GDP growth
+#### (III)The relationship between electricity use and GDP growth
 From the previous chart analysis, the author wondered why the growth rate of electricity consumption in Anhui Province no longer continued to slow down with the growth rate of GDP? Since 2010, the growth rate of GDP has slowed down, and the growth rate of the advantageous industries (secondary industry) in Anhui Province has also slowed down (see Figure 2-4). But what are the reasons for this deviation in growth rate after 2017? Is it due to the industrial transformation of Anhui Province? After the industrial transformation, the electric power can no longer reflect the development status of the leading industry at this stage? In the context of slowing GDP growth, is economic development and energy demand no longer as closely linked as before?
 
 In the following sections, this paper will conduct characteristic analysis and quantitative analysis of economic growth and electricity consumption in an attempt to explain these raised questions.
@@ -272,8 +272,10 @@ Its economic meaning is that when E is less than 1, equal to 1, or greater than 
 Electricity consumption per unit of output value (denoted by $EP$) refers to the electric energy consumed per unit of real GDP(denoted by $Y$). It reflects the power utilization efficiency of a region, and the unit is kWh/yuan. The lower the electricity consumption per unit of output value, the higher the electricity efficiency. It is defined by Equation 3.2
 
 $$ EP_t = \frac{EC_t}{Y_t}     \tag{eq 3.2}$$
-####(II) Factors affecting the growth rate of electricity consumption
-#####(1) The growth rate of electricity consumption
+
+#### (II) Factors affecting the growth rate of electricity consumption
+
+##### (1) The growth rate of electricity consumption
 In Equation 3.3, we introduce the growth rate of electricity consumption (denoted as $g^{EC}_t$), and the growth rate of GDP (denoted as $g^y_t$ for year t)to illustrate the relationship between the growth rate of electricity consumption, the growth rate of electricity consumption per unit of output value(denoted as $g^{EP}_t$), and the growth rate of GDP. Equation 3.3 shows that the GDP growth rate and the growth rate of electricity consumption per unit of output value jointly determine the size of the growth rate of electricity consumption. 
 
 $$
@@ -296,7 +298,7 @@ Equation 3.4 describes the quantity relationship between the elasticity coeffici
 Under normal circumstances, when $g_t^Y$ is greater than 0, real GDP keeps increasing, but as $g_t^{EP}$ decreases to a negative number, $g_t^{EC}$ will appear to be less than $g_t^Y$. When $g_t^{EP}$ is negative and very small, $g_t^{EC}$ will deviate downward from $g_t^Y$. When enough deviation occurs, the two may have opposite trends, as shown in Figure 2-7. This explanation is of great significance to our subsequent research, and it is the core content of subsequent research.
 
 
-#####(2) Electricity consumption per unit output value
+##### (2) Electricity consumption per unit output value
 The electricity consumption per unit of output value is a measure of the intensity of electricity consumption, which reflects the efficiency of electricity utilization in the process of economic growth. The lower the electricity consumption per unit of output value, the higher the electricity usage efficiency, and vice versa, the lower the electricity usage efficiency. When the electricity consumption per unit of output value shows a downward trend, the electricity elasticity coefficient is less than 1, otherwise it is greater than 1.
 
 Regarding the factors that affect the change of electricity consumption per unit of output value, Steenhof (2006)$^{[12]}$ used the structural decomposition method to analyze the electricity consumption of China's industrial sector and found that, changes in industrial structure, energy transfer and the improvement of electricity efficiency are the main factors that change the electricity consumption per unit of output value.
@@ -354,4 +356,737 @@ library(knitr)
 kable(energy_correlation_matrix, index = FALSE, caption = 'energy growth rate correlation with gdp growth rate', align = 'c')
 
 ```
+
+Table 2 shows the correlation matrix between various energy sources and GDP growth rates. From this, we can see that in terms of growth rate, electricity, GDP and coal growth have a very large positive correlation coefficient (0.58, 0.5 respectively), which is also in line with the previous discussion, 60% of coal is used for thermal power generation. On the other hand, as we can see from the last column, in terms of growth rate, GDP has the highest correlation coefficient with electricity use (0.58), followed by Diesel, coal (0.47, 0.34 respectively), and Fuel_oil has the highest correlation coefficient (0.58) Large negative correlation (-0.51). It is worth mentioning that, as can be seen from Table 1, the consumption of coal is several times that of other fossil fuels calculated in tons. Therefore, we have reason to believe that electricity still has a great correlation with GDP. On the other hand, other energy sources are gradually replacing coal as the driving force for GDP growth.
+
+##### (2) Industrial and residential electricity. 
+Figure 4-1 illustrates the proportion of industrial electricity and residential electricity in total electricity consumption since records began. Industry includes primary, secondary, and tertiary industries. It can be seen that industrial electricity has always accounted for the vast majority of all electricity consumption. Combined with Table 3, in terms of growth rate, we have listed the correlation matrix of electricity consumption in the whole society, industrial electricity consumption, and GDP.
+
+It can be seen that the correlation coefficient between the growth rate of gdp and the growth rate of overall electricity use is the highest (0.58), and the correlation coefficient with the growth rate of industrial electricity consumption is slightly lower (0.56). In contrast, the correlation coefficient of the growth rate of residential electricity consumption is only (0.36)
+
+
+
+```{r industrial_residential_electricity_plot setup, include=FALSE}
+
+electricity_data <- read.csv('D:/03狠活/IO/data/electricity_usage.csv', fileEncoding = "UTF-8-BOM")
+
+resid_industry_usage_table <- select(electricity_data, 'year', 'Total_industry', 'Resident')
+
+resid_industry_usage_table_melt <- melt(resid_industry_usage_table, id.vars = 'year', variable.name = 'Type')
+
+resident_industry_plot <-  ggplot(data = resid_industry_usage_table_melt)+
+  geom_bar(mapping = aes(x = year, y = value, fill = Type), stat = 'identity', position = 'stack', alpha = 0.55)+
+   scale_x_continuous(breaks = unique(resid_industry_usage_table_melt$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 4_1: Comparison of Industrial Electricity and Residential Electricity", )+ 
+  labs(x = 'Year', y = '(100 Million kWh)')+
+  # https://statisticsglobe.com/change-font-size-of-ggplot2-plot-in-r-axis-text-main-title-legend
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+
+
+resid_industry_total_usage_table <- select(electricity_data, 'year', 'Total','Total_industry', 'Resident')
+
+GDP_growth_rate_table <- select(gdp_data, 'year', 'gdp_growth')
+
+len_col_resid_industry_total <- dim(resid_industry_total_usage_table)[2]
+for (i in 2: len_col_resid_industry_total){
+  resid_industry_total_usage_table[,i] <-c(NA, 100*(diff(resid_industry_total_usage_table[,i])/resid_industry_total_usage_table[,i][-length(resid_industry_total_usage_table[,i])]))
+} 
+resid_industry_total_growth <- resid_industry_total_usage_table
+
+gdp_resid_industry_total_growth_compare = merge(resid_industry_total_growth, GDP_growth_rate_table, by = 'year', all = FALSE)
+
+gdp_resid_industry_total_growth_corr_matrix = data.frame(cor(gdp_resid_industry_total_growth_compare, use = "pairwise.complete.obs")%>% round(2))
+```
+
+```{r show resid_indust_compare_plot, echo=FALSE, warning=FALSE, fig.height=3, fig.width=5.5, fig.align='center'}
+resident_industry_plot
+```
+
+```{r show correlation between redis_indus and GDP, echo=FALSE}
+
+kable(gdp_resid_industry_total_growth_corr_matrix, index = FALSE, caption = 'electricity growth rate correlation with gdp growth rate', align = 'c')
+
+
+```
+
+Because the growth rate of industrial electricity consumption is more relevant to GDP growth, we will mainly use the data of the growth rate of industrial electricity consumption, supplemented by the data of the overall electricity consumption growth rate.
+
+#### (II) Econometric Model Analysis
+
+This section will test the relationship between the following variables and the growth rate of electricity consumption. $g_t^{EC}$ represents the growth rate of electricity consumption in the whole industry, which is used to represent the change in electricity consumption for industry; $g_t^y$ represents the increase in GDP Growth rate, which represents changes in economic growth. $K_{it}$ represents the ratio of the output value of the $i$ industry to the increase in GDP of the year, which is used to measure the changes in the industrial structure. ${EP_i}$ represents the Electricity consumption per unit output value of the $i$th industry, $g_{t}^{EP_i}$ represents its rate, which reflects the change of electric energy utilization efficiency.
+
+From this we can know that, $K_{1t} + K_{2t} + K_{3_t} = 1$, in order to avoid perfect collinearity in the regression, we only list the proportion of the secondary industry $K_{2t}$ and the tertiary industry $K_{3t}$, because it can be seen from Figure 2-3 that the proportion of the primary industry is less and slower than other two industries. 
+
+```{r timeseries analysis data setup, include=FALSE}
+gdp_data  <- read.csv("D:/03狠活/IO/data/gdp_data.csv", fileEncoding = "UTF-8-BOM" )
+
+electricity_data <- read.csv('D:/03狠活/IO/data/electricity_usage.csv', fileEncoding = "UTF-8-BOM")
+
+gdp_growth_rate <- c(NA, (diff(gdp_data$GDP)/gdp_data$GDP[-length(gdp_data$GDP)])*100)
+
+primary_growth_percent<- c(NA, (diff(gdp_data$primary_industry)/diff(gdp_data$GDP))*100)
+
+secondary_growth_percent <- c(NA, (diff(gdp_data$secondary_industry)/ diff(gdp_data$GDP))*100)
+
+tertiary_growth_percent <- c(NA, (diff(gdp_data$tertiary_industry)/diff(gdp_data$GDP))*100)
+
+gdp_data['gdp_growth_rate'] = gdp_growth_rate
+gdp_data['primary_growth_percent'] <- primary_growth_percent
+gdp_data['secondary_growth_percent'] <- secondary_growth_percent
+gdp_data['tertiary_growth_percent'] <- tertiary_growth_percent
+
+###  setup electricity_data and gdp_data table merge
+
+
+gdp_electricity_data = merge(electricity_data, gdp_data, by = 'year',)
+
+## calculate electricity consumption per unit of output for each industry
+
+industry_electricity_growth_rate <-  c(NA, (diff(gdp_electricity_data$Total_industry)/gdp_electricity_data$Total_industry[-length(gdp_electricity_data$Total_industry)])*100)
+
+EP_primary <- c(gdp_electricity_data$Primary/gdp_electricity_data$primary_industry)
+
+EP_secondary <- c(gdp_electricity_data$Secondary/gdp_electricity_data$secondary_industry)
+
+EP_tertiary <- c(gdp_electricity_data$Tertiary / gdp_electricity_data$tertiary_industry)
+
+gdp_electricity_data['industrial_electricity_growth'] <-  industry_electricity_growth_rate
+gdp_electricity_data['EP_primary'] <- EP_primary
+gdp_electricity_data['EP_secondary'] <- EP_secondary
+gdp_electricity_data['EP_tertiary'] <- EP_tertiary
+
+
+
+```
+
+Since the above variables are time series data, in order to avoid problems such as pseudo-regression, OLS cannot be used directly for regression. In order to avoid the pseudo-regression problem, this paper uses the cointegration test method to test the unit root of the residual of the regression equation, also known as the Engle-Granger test method. This method requires that each variable is integrated of order 1 (also be written as $I(1)$), and then performs regression based on OLS. After the regression, the residual sequence estimated by the model is obtained, and then use unit root test on the residual sequence to determine whether the residual sequence is stable or integrated of order 0. If the residual sequence is stable (also be written as $I(0)$), each variable in the regression equation has a co-integration relationship, the equation setting is reasonable. Then the estimated of independent variables' coefficients under OLS are "super-consistent" estimator, converge to true result much faster than usual asymptotics.
+
+##### (1) Stationarity Test
+In this paper, We first perform a stationarity test on the previously mentioned variables ($g_t^{EC}$, $g_t^y$, $K_{it}$). Since many economic and financial time series have a more complicated dynamiv structure than is captured by a simple AR(1) model, so we choose *Augmented Dickey-Fuller (ADF)Test*, which is invented by Said and Dickey (1894)$^{[14]}$, they augment the basic autoregressive unit root test to accommodate general ARMA models, with a wider applicability.
+
+It is further worth noting that the critical value table for judging whether the residual series is stationary is different from the ADF critical value table. This is because the basic principle of using the ordinary least squares method is to minimize the residual sum of squares, so the residual sequence generated by the regression equation is small. If the ADF critical value table is still used for judgment, it will lead to the probability ratio of rejecting the null hypothesis. The real situation is large, so the AEG critical value table smaller than the ADF threshold value should be used for judgment. The AEG critical value table was derived by Mackinnon in 1991 through simulation experiments$^{[16]}$.
+
+```{r ADF test on variables, include=FALSE}
+## calculate variables' adf test score, and their difference adf test score, 
+library(tseries)
+# growth rate for industrial electricity growth 
+electricity_growth_adf <- adf.test(na.omit(gdp_electricity_data$industrial_electricity_growth), k=1)
+
+electricity_growth_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$industrial_electricity_growth)), k=1)
+
+#adf test for EP
+EP_primary_adf <- adf.test(na.omit(gdp_electricity_data$EP_primary), k=1)
+
+EP_primary_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_primary)), k=1)
+
+EP_secondary_adf <- adf.test(na.omit(gdp_electricity_data$EP_secondary), k=1)
+
+EP_secondary_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_secondary)), k=1)
+
+EP_tertiary_adf <- adf.test(na.omit(gdp_electricity_data$EP_tertiary), k=1)
+
+EP_tertiary_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_tertiary)), k=1)
+
+#adf test for growth percent
+primary_growth_percent_adf <- adf.test(na.omit(gdp_electricity_data$primary_growth_percent), k=1)
+
+primary_growth_percent_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$primary_growth_percent)), k=1)
+
+secondary_growth_percent_adf <- adf.test(na.omit(gdp_electricity_data$secondary_growth_percent), k=1)
+
+secondary_growth_percent_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$secondary_growth_percent)), k=1)
+
+tertiary_growth_percent_adf <- adf.test(na.omit(gdp_electricity_data$tertiary_growth_percent), k=1)
+
+tertiary_growth_percent_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$tertiary_growth_percent)), k=1)
+
+### gdp growth rate adf test
+
+gdp_growth_adf <- adf.test(na.omit(gdp_electricity_data$gdp_growth_rate), k = 1)
+
+gdp_growth_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$gdp_growth_rate)), k =1)
+```
+
+
+```{r  show the adf test for all variables, include=FALSE}
+electricity_growth_adf
+electricity_growth_adf_diff
+
+gdp_growth_adf
+gdp_growth_adf_diff
+
+primary_growth_percent_adf
+primary_growth_percent_adf_diff
+
+secondary_growth_percent_adf
+secondary_growth_percent_adf_diff
+
+tertiary_growth_percent_adf
+tertiary_growth_percent_adf_diff
+
+EP_primary_adf
+EP_primary_adf_diff
+
+EP_secondary_adf
+EP_secondary_adf_diff
+
+EP_tertiary_adf
+EP_tertiary_adf_diff
+
+
+
+```
+
+```{r create a table to show adf test result, include=FALSE}
+variable <- c('industrial_electricity_growth_rate', 'gdp_growth_rate', 'K_2', 'K_3', 'EP_1', 'EP_2', 'EP_3')
+
+ADF_statistics_diff <- c(-5.72, -2.8486, -3.7493, -2.2549, -4.2262, -3.3373, -2.7046)
+
+P_value_diff <- c(0.01, 0.2491, 0.03934, 0.08979, 0.01537, 0.08648, 0.304)
+
+
+ADF_test_table_diff <- data.frame(variable, ADF_statistics_diff, P_value_diff)
+
+
+ADF_statistics <- c(-2.3058, -1.3832, -1.1795, -2.2549, -1.5255, -5.7295, -1.1139)
+P_value <- c(0.4559, 0.8073, 0.8849, 0.4753, 0.7532, 0.01, 0.9038)
+
+ADF_test_table <- data.frame(variable, ADF_statistics, P_value)
+
+
+```
+
+```{r show ADF test table, echo=FALSE}
+kable(ADF_test_table, caption = 'ADF test report (null hypothesis: not stationary)', align = 'c')
+
+kable(ADF_test_table_diff, caption = 'First Difference ADF test report (null hypothesis: not stationary)', align = 'c')
+
+```
+Table 4 and Table 5 show the ADF statistics of the variables. where **K_2** and **K_3** represent $K_{2t}$ and $K_{3t}$ respectively, where **EP_1** , **EP_2**, **EP_3** represent $EP_{1t}$, $EP_{2t}$, $EP_{3t}$ respectively. As can be seen from the table, the first-order difference sequence of almost all variables rejects the null hypothesis that there is a unit root at the 10% significance level, except for gdp Growth rate, which is also the focus of our later research. At the same time, we can also show that these three sequences are all first-order single integer sequences. Therefore, an EG cointegration test can be performed based on OLS regression.
+
+```{r test ols residuals, include=FALSE}
+
+linear_result_1 = lm(industry_electricity_growth_rate ~ gdp_growth_rate + secondary_growth_percent + tertiary_growth_percent + EP_primary + EP_secondary + EP_tertiary, data = gdp_electricity_data)
+
+residual_adf = adf.test(linear_result_1$residuals, k =1)
+summary(linear_result_1)
+```
+
+##### (2) Model building
+After confirming that the above variables are first-order single integration, the regression equation of the growth rate of electricity consumption in the whole industry, the growth rate of GDP and the proportion of industrial added value to GDP added value is established. It is used to estimate the specific impact degree of electricity consumption growth rate deviating from GDP growth rate caused by changes in industrial structure. 
+
+The result I get is as table 6.
+
+```{r create a table to show regression result, include=FALSE}
+# https://stackoverflow.com/questions/64622136/tidyverses-tidy-function-not-working-in-r
+library(broom)
+
+# https://zief0002.github.io/book-8252/pretty-printing-tables-in-markdown.html#correlation-table
+linear_result = lm(industry_electricity_growth_rate ~ 1 + gdp_growth_rate + secondary_growth_percent + tertiary_growth_percent + EP_primary + EP_secondary + EP_tertiary , data = gdp_electricity_data) %>%
+  tidy() %>%
+  mutate(
+    p.value = scales::pvalue(p.value),
+    term = c('Intercept','gdp_growth_rate', 'K_2', 'K_3', 'EP_1', 'EP_2', 'EP_3')
+  ) %>%
+  kable(
+    caption = " model regression result (Adjusted R-squared: 0.7164)",
+    col.names = c("Predictor", "B", "SE", "t", "p"),
+    digits = c(0, 2, 3, 2, 3)
+  )
+
+```
+
+```{r regression residual result table, include=FALSE}
+variable <- c('linear_result$residuals')
+ADF_statistics_residual <- c(-3.4003)
+P_value_residual <- c(0.078)
+
+ADF_residual_test_table <- data.frame(variable, ADF_statistics_residual, P_value_residual)
+```
+Before testing the regression results, we first need to perform a unit root test on the residuals to judge whether our cointegration regression is credible.
+
+```{r show result for linear regression residuals, echo=FALSE, warning=FALSE}
+kable(ADF_residual_test_table, caption = "ADF test for linear regression's residuals", align = 'c')
+linear_result
+```
+
+Table 6 shows the results of the unit root test of the residuals of the regression results. The results show that the residuals are stationary series, which shows that we can believe that independent variables and the dependent variable are cointegrated. 
+
+According to the results in Table 7, the growth rate of industrial electricity consumption ($g_t^{EC}$) has a positive correlation with the growth rate of gdp ($g_t^y$). When GDP growth rate increase by 1 percent, the growth rate of electricity consumption will increase by 2.02 percent. 
+
+On the other hand, $g_t^{EC}$ is indeed affected by changes in the industrial structure. When the proportion of the increase in the secondary industry' value to the increase in total GDP($K_{2t}$) increases by one percent, $g_t^{EC}$ will increase by 0.24 percent. In addition, for tertiary industry, that ratio($K_{3t}$) increases by 1 percent will lead to an increase of 0.72 percent in $g_t^{EC}$. It can be seen from this that with the development of the tertiary industry, although the secondary industry still occupies a large proportion in GDP, its role in promoting the growth rate of industrial electricity consumption is not as good as that of the tertiary industry. After the transformation of the industrial structure, the proportion of the tertiary industry in the increased GDP($K_{2t}$) in Anhui Province has increased (Figure 2_3), and the tertiary industry has become the driving force for the growth rate of electricity consumption. This is also in line with the previous inference that the reduction of the secondary industry is an important reason for the change in the growth rate of industrial electricity consumption.
+
+In the regression, except for the electricity consumption per unit output value of the primary industry, the electricity consumption coefficient per unit output value of other industries is not significant. In addition, adjusted R-Squared is only 0.72, indicating that our model still needs to be improved.
+
+##### (3) Adjust the model
+In order to improve the goodness of fit of the model and enhance the explanatory power of the model, according to the previous analysis of the factors affecting the growth rate of electricity consumption, I choose to use the growth rate of electricity consumption per unit output value to replace the electricity consumption per unit output value in the original model. , we repeat the same steps as before and get the result as follows.
+
+```{r create growth rate of electricity consumption per unit output value, include=FALSE}
+EP_primary_rate <- c(NA, (diff(gdp_electricity_data$EP_primary)/gdp_electricity_data$EP_primary[-length(gdp_electricity_data$EP_primary)])*100)
+
+
+EP_secondary_rate <- c(NA, (diff(gdp_electricity_data$EP_secondary)/gdp_electricity_data$EP_secondary[-length(gdp_electricity_data$EP_secondary)])*100)
+
+
+EP_tertiary_rate <- c(NA, (diff(gdp_electricity_data$EP_tertiary)/gdp_electricity_data$EP_tertiary[-length(gdp_electricity_data$EP_tertiary)])*100)
+
+
+gdp_electricity_data['EP_primary_rate'] = EP_primary_rate
+gdp_electricity_data['EP_secondary_rate'] = EP_secondary_rate
+gdp_electricity_data['EP_tertiary_rate'] = EP_tertiary_rate
+
+
+```
+
+```{r adf test for adjusted variables, include=FALSE}
+EP_primary_rate_adf <- adf.test(na.omit(gdp_electricity_data$EP_primary_rate), k=1)
+
+EP_primary_rate_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_primary_rate)), k=1)
+
+EP_secondary_rate_adf <- adf.test(na.omit(gdp_electricity_data$EP_secondary_rate), k=1)
+
+EP_secondary_rate_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_secondary_rate)), k=1)
+
+EP_tertiary_rate_adf <- adf.test(na.omit(gdp_electricity_data$EP_tertiary_rate), k=1)
+
+EP_tertiary_rate_adf_diff <- adf.test(diff(na.omit(gdp_electricity_data$EP_tertiary_rate)), k=1)
+
+
+
+
+
+```
+
+```{r create a table for adjusted vaiables, include=FALSE}
+variable_2 <- c('EP_1_growth', 'EP_2_growth', 'EP_3_growth')
+
+ADF_statistics_diff_2 <- c(-4.2262, -3.3373, -2.7046)
+
+P_value_diff_2 <- c(0.01537, 0.08648, 0.304)
+
+
+ADF_test_table_diff_2 <- data.frame(variable_2, ADF_statistics_diff_2, P_value_diff_2)
+
+
+ADF_statistics_2 <- c(-1.5255, -5.7295, -1.1139)
+P_value_2 <- c(0.7532, 0.01, 0.9038)
+
+ADF_test_table_2 <- data.frame(variable_2, ADF_statistics_2, P_value_2)
+
+```
+
+```{r show adjusted variable adf test, echo=FALSE}
+kable(ADF_test_table_2, caption = 'ADF test report (null hypothesis: not stationary)', align = 'c')
+
+kable(ADF_test_table_diff_2, caption = 'First Difference ADF test report (null hypothesis: not stationary)', align = 'c')
+
+```
+
+In tables 7 and 8, **EP_1_growth**, **EP_2_growth**, **EP_3_growth** represent $g_t^{EP_1}$, $g_t^{EP_2}$, $g_t^{EP_3}$ respectively. Tables 7 and 8 show that except for the growth rate of electricity consumption per unit of output in the tertiary industry, these variables are stable (within the conventional confidence interval) after the first-order difference.
+
+
+```{r show adjusted linear regression result, include=FALSE}
+linear_result_2 = lm(industry_electricity_growth_rate ~ gdp_growth_rate + secondary_growth_percent + tertiary_growth_percent + EP_primary_rate + EP_secondary_rate + EP_tertiary_rate + 1, data = gdp_electricity_data)
+
+Adjusted_linear_result = lm(industry_electricity_growth_rate ~  gdp_growth_rate + secondary_growth_percent + tertiary_growth_percent + EP_primary_rate + EP_secondary_rate + EP_tertiary_rate +1, data = gdp_electricity_data) %>%
+  tidy() %>%
+  mutate(
+    p.value = scales::pvalue(p.value),
+    term = c('Intercept','gdp_growth_rate', 'secondary_growth_percent', 'tertiary_growth_percent', 'EP_primary_rate', 'EP_secondary_rate', 'EP_tertiary_rate')
+  ) %>%
+  kable(
+    caption = "adjusted model regression result  (Adjusted R-squared: 0.9683) ",
+    col.names = c("Predictor", "B", "SE", "t", "p"),
+    digits = c(0, 2, 3, 2, 3)
+  )
+
+Adjusted_residuals_adf = adf.test(linear_result_2$residuals, k = 1 )
+
+variable_3 <- c('Adjusted_linear_result$residuals')
+ADF_statistics_residual_3 <- c(-3.5705)
+P_value_residual_3 <- c(0.05409)
+
+Adjusted_ADF_residual_test_table <- data.frame(variable_3, ADF_statistics_residual_3, P_value_residual_3)
+
+```
+
+From Table 9, it can be seen that the residuals are stationary, which means that we can trust the results of the cointegration model. According to the results in Table 10, it is not difficult to see that the parameters of each part have significantly improved, and the Adjusted R-squared has increased to 0.9683, which indicates that the model can better describe the explained variables. 
+```{r show adjusted model residuals adf test, echo=FALSE}
+kable(Adjusted_ADF_residual_test_table, caption = "ADF test for adjusted model's residuals", align = 'c')
+Adjusted_linear_result
+
+```
+
+From the results, we can derive the equation of the regression model:
+
+$$\hat g_t^{EC} = 1.41g_t^y + 0.14K_{2t} + 0.15K_{3t} - 0.02g_t^{EP_{1}} + 0.87 g_t^{EP_{2}} + 0.08 g_t^{EP_{3}} -17.79  \tag{eq 4.1}$$
+
+The adjusted model still shows that changes in GDP growth rate have a significant impact on the growth rate of electricity consumption, Whenever $g_t^y$ increases by 1 percent, $g^{EC}_t$ increases by 1.4 percent. Especially for the secondary industry, when the proportion of the increase in the output value of the secondary industry to the increase in total GDP increases by one percentage point, the growth rate of industrial electricity consumption will increase by 1.41 percent. However, in the adjusted model, $K_{2t}$ and $K_{3t}$ have similar effects on $g_t^{EC}$ with coefficients of 0.14 and 0.15, respectively. This shows that under the adjusted model, changes in industrial structure have a similar impact on the growth rate of industrial electricity consumption, in terms of  secondary and tertiary industry.
+
+In terms of industrial electricity efficiency, $g_t^{EP_2}$ has the largest coefficient (0.86), far exceeding $g_t^{EP_3}$ (0.08). On the one hand, this shows that the improvement of the electricity efficiency of the secondary industry will greatly increase the growth rate of electricity consumption and stimulate the growth of electricity consumption.  On the other hand, the electricity consumption efficiency of the growth rate of the tertiary industry has a limited impact on the growth rate of electricity consumption, indicating that the increase in the output value of the tertiary industry will not use more electricity.
+
+It is worth mentioning that the coefficient of ${g_t^{EP_1}}$ is negative. This shows that when the electricity efficiency of the primary industry is improved, it can delay the growth rate of electricity consumption and save more energy.
+
+#### (III) Conclusion
+According to the econometric method, this chapter establishes a linear regression model by proving that the growth rate of electricity consumption has a cointegration relationship with other variables. 
+
+Through the linear model, we can know that the growth rate of gdp still has a significant positive effect on the growth rate of electricity consumption, which is also the core issue we have been discussing, the relationship between $g_t^{EC}$ and $g_t^y$ deviation. We will continue the analysis in the next chapter.
+
+The change of industrial structure has a positive effect on the growth rate of electricity consumption. In the increased GDP, with the increase in the proportion of the secondary industry ($K_{2t}$) and the tertiary industry ($K_{3t}$) , $g_t^{EC}$ is also increasing. Overall, $K_{3t}$ will lead to a larger impact on $g_t^{EC}$ than $K_{2t}$, when the proportion of the tertiary industry increases, it will cause the industrial electricity consumption to grow faster than other industries. Combined with the proportion of tertiary industry output value in recent years ($K_ {3t}$) increases, we can predict that the industrial structure will have a lasting impact on $g_t^{EC}$
+
+In terms of electricity consumption per unit of output value, the secondary industry has a great impact on $g_t^{EC}$, which shows that the secondary industry is the main driving force for the growth of electricity, and it also shows that: as the proportion of the secondary industry in GDP declines , the connection between $g_t^{EC}$ and $g_t^{y}$ will not be very close. Conversely, $g_t^{EP_1}$, $g_t^{EP_1}$ have less impact on $g_t^{EC}$. Although the output value of the tertiary industry is increasing, the improvement of their power utilization efficiency has a relatively limited impact on power consumption.
+
+Overall, according to our regression model, the growth rate of gdp has a strong relationship with the growth rate of electricity use. In terms of the impact of changes in industrial structure $K_{it}$, the increase in the proportion of the tertiary industry has a greater impact on electricity consumption than the secondary industry. In terms of electricity consumption per unit output value $EP_{it}$, the increase in the secondary industry will greatly increase the electricity consumption, which is far greater than that of the tertiary and primary industries. GDP growth rate, changes in industrial structure, and electricity consumption per unit of output value jointly determine the growth rate of electricity consumption. The secondary and tertiary industries, which account for the vast majority of GDP, have a greater impact in different aspects ($EP$ and industry structure change respectively). In order to see more clearly what causes the deviation of $g_t^{EC}$ and $g_t^y$, we will use the *Logarithmic Mean Divisia Index Method (LMDI)* to decompose the electricity consumption, which will be covered in the next chapter.
+
+
+
+
+
+
+
+
+
+
+### Chapter5 Research on the deviation of Anhui’s power consumption from economic growth based on the LMDI method
+
+In order to quantify the relationship between electricity consumption and economic growth more accurately, and to better explain the deviation of electricity consumption from economic growth, I use *Logarithmic Mean Divisia Index Method (LMDI)* to  analyze the electricity consumption of the whole industry in Anhui Province. By decomposing industrial electricity consumption, the reader can see how much the output effect, intensity effect, and structural change effect contribute to the deviation.
+
+#### (I) Logarithmic Mean Divisia Index Method (LMDI)
+##### (1) Introduction of LMDI
+The LMDI method was proposed by Ang.B.W et al. in 2004, and is the mainstream analysis method in the field of exponential decomposition in recent years. This method decomposes the change of the explained variable into the sum of the changes of the independent explanatory variables that cause its change by differentiating the time (t), so as to calculate the contribution of the change of the explanatory variable to the change of the explained variable. The biggest advantage of this method is that the influence of cross terms can be completely decomposed, and there will be no unexplained residual terms, and the solution to the problem of zero and negative values in the decomposition process is given. This allows the LMDI method to be used in a variety of situations.
+
+##### (2) LMDI decomposition mechanism
+First, we use the method of the KAYA identity (1993)$^{[17]}$ to decompose the overall electricity consumption, and the result is as shown in equation 5.1. Here $EC_t$, $EC_{it}$ represent the electricity consumption of the whole industry in the year, and the electricity consumption of the $i$ industry respectively, $Y_t$ and $Y_it$ represent the total GDP and the $i$ industry GDP respectively.
+
+$$EC_t = \sum_{i=1}^nEC_{it} =\sum_{i=1}^n\frac{EC_{it}}{Y_{it}}*\frac{Y_{it}}{Y_t}*Y_t   \tag{eq 5.1}$$
+From equation 5.1 we can derive equation 5.2 with $EP_{it}$, $K_{it}$, from Equation 5.1, we can deduce Equation 5.2 with $EP_{it}$, $S_{it}$, $EP_{it}$ measures the electricity efficiency of the $i$-th industry, $S_{it}$ represents the proportion of the output value of the $i$-th industry in GDP,measures the change of the industrial structure, $Y$ measures the state of economic development.
+$$EC_t = \sum_{i=1}^nEP_{it}*S_{it}*Y_t \tag{eq 5.2}$$
+
+According to the method proposed by Ang B. W, the change in power consumption in the base period and the current period is:
+$$\Delta EC_t = EC_t - EC_0 = \Delta EC_{t}^{EP} + \Delta EC_{t}^{S} + \Delta EC_t^{Y} \tag {eq 5.3}$$
+$\Delta EC_t$ is the amount of change in power consumption, based on the comparison between the base period and the t period. $\Delta EC_t^{Ep}$ is the amount of in electricity consumption per unit output value of the i industry, also known as **intensity effect**.When it is negative, it means that the industry can save electricity after the efficiency of electricity consumption is improved, and it is the opposite when it is positive. $\Delta EC_{t}^{S}$ is the amount of change in the proportion of the $i$th industry in the total GDP, also known as **structure effect**. When it is negative, it means that the proportion of the industry GDP to total GDP increases can save electricity, and it is the opposite when it is positive. $\Delta EC_t^{Y}$ is the amount of change in GDP, also known as **output effect**. Typically, it is a positive number because as GDP grows, electricity use will inevitably grow. It is also a major source of growth in electricity use.
+
+##### (3) Derivation of the effect formula
+
+Since that there are several forms of LMDI, the decomposition method I chose here is as follows:
+
+Given an economic variable $y_t$, $y_t$ can be represented by the product of n factors $x_1$ $x_2$...$x_n$
+
+$$y_t = \prod_{i = 1}^{n}x_{i,t}  \tag {eq 5.4}$$
+Among them, $X_{i,0}$, $X_{i,1}$ represent the value of the base period and the current period of the explanatory variable $X_i$, respectively. According to the LMDI method proposed by Ang et al., the change in y can be decomposed into:
+$$\Delta y = \sum_{i=1}^n\frac{\Delta y}{\Delta (\ln y)} \ln \frac{x_{i,1}}{x_{i,0}} \tag {eq 5.5}$$
+According to Equation 5.5, we can derive $\Delta EC_t^{Ep}$, $\Delta EC_{t}^{S}$, $\Delta EC_t^{Y}$ as follow:
+$$ \Delta EC_t^{EP} = \sum_{i=1}^n W_i * \ln \frac{EP_{i,t}}{EP_{i,0}} \tag{eq 5.6}$$
+$$\Delta EC_t^{S} = \sum_{i=1}^n W_i * \ln \frac{S_{i,t}}{S_{i,0}} \tag{eq 5.7}$$
+$$\Delta EC_t^{Y} = \sum_{i=1}^n W_i * \ln \frac{Y_{t}}{Y_{0}} \tag{eq 5.8}$$
+
+$$W_i = \frac{EP_{i,t} * S_{i,t} * Y_t - EP_{i,0} * S_{i,0} * Y_0}{\ln(EP_{i,t} * S_{i,t} * Y_t) - \ln (EP_{i,0} * S_{i,0} * Y_0)} \tag {eq 5.9}$$
+
+This article uses these symbols to represent the degree of contribution of different effects:
+
+$$C_{EP_{t}} = \frac{\Delta EC_t^{EP}}{\Delta EC_t} \tag{eq 5.10}$$
+$$C_{S_{t}} = \frac{\Delta EC_t^{S}}{\Delta EC_t} \tag{eq 5.11}$$
+
+$$C_{Y_{t}} = \frac{\Delta EC_t^{Y}}{\Delta EC_t} \tag{eq 5.12}$$
+It can be seen from above equations that $C_{EP_{i,t}} + C_{S_{i,t}}+ C_{Y_{t}} =1$. Later, we will use the last year as the base year to calculate the indicators listed above. In order to facilitate the reader to compare the multiple relationship, the percentage is not used for $C_{EP_{i,t}}$ $C_{S_{i,t}}$, $C_{Y_{t}}$, but the ratio is directly displayed.
+
+#### (II) Results of Decomposition Based on LMDI Method
+
+In this chapter, in order to reflect the impact of economic scale and output on electricity consumption, the whole industrial electricity consumption is used as the explained variable. Because residential electricity consumption is far less than industrial electricity consumption, and residential electricity consumption generally has no economic output, only the electricity consumption of the whole industry is considered.
+
+This chapter analyzes the electricity consumption of the whole industry, the primary industry, the secondary industry, and the tertiary industry successively, and draws the statistical results into a table for readers to view.
+
+##### (1) Decomposition of industrial electricity consumption in Anhui Province
+```{r calculate total industrial elect, include=FALSE}
+electricity_data <- read.csv('D:/03狠活/IO/data/electricity_usage.csv', fileEncoding = "UTF-8-BOM")
+gdp_data <- read.csv("D:/03狠活/IO/data/gdp_data.csv", fileEncoding = "UTF-8-BOM" )
+
+# select value we need 
+electricity_data_2 <- select(electricity_data, 'year', 'Primary', 'Secondary', 'Tertiary', 'Total_industry')
+gdp_data_2 <- select(gdp_data, 'year', 'GDP', 'primary_industry', 'secondary_industry', 'tertiary_industry')
+
+LMDI_data <- merge(electricity_data_2, gdp_data_2, by = 'year', all = FALSE) 
+
+#### use LMDI for total industry
+# calculate industry electricity difference
+
+
+EP_total <- (LMDI_data$Total_industry/LMDI_data$GDP)
+EP_primary <- (LMDI_data$Primary/LMDI_data$primary_industry)
+EP_secondary <- (LMDI_data$Secondary/LMDI_data$secondary_industry)
+EP_tertiary <- (LMDI_data$Tertiary/LMDI_data$tertiary_industry)
+
+S_primary <- (LMDI_data$primary_industry/LMDI_data$GDP)
+S_secondary <- (LMDI_data$secondary_industry/LMDI_data$GDP)
+S_tertiary <- (LMDI_data$tertiary_industry/LMDI_data$GDP)
+
+LMDI_data['EP_primary'] = EP_primary
+LMDI_data['EP_secondary'] = EP_secondary
+LMDI_data['EP_tertiary'] = EP_tertiary
+
+LMDI_data['S_primary'] = S_primary
+LMDI_data['S_secondary'] = S_secondary
+LMDI_data['S_tertiary'] = S_tertiary
+
+# set the based year data (1995) as base data.
+Total_indusry_0  <- c(NA, LMDI_data$Total_industry[-length(LMDI_data$Total_industry)])
+GDP_0 <- c(NA, LMDI_data$GDP[-length(LMDI_data$GDP)])
+EP_primary_0 <- c(NA, LMDI_data$EP_primary[-length(LMDI_data$EP_primary)])
+EP_secondary_0 <- c(NA, LMDI_data$EP_secondary[-length(LMDI_data$EP_secondary)])
+EP_tertiary_0 <- c(NA, LMDI_data$EP_tertiary[-length(LMDI_data$EP_tertiary)])
+
+S_primary_0 <- c(NA, LMDI_data$S_primary[-length(LMDI_data$S_primary)])
+S_secondary_0 <- c(NA, LMDI_data$S_secondary[-length(LMDI_data$S_secondary)])
+S_tertiary_0 <- c(NA, LMDI_data$S_tertiary[-length(LMDI_data$S_tertiary)])
+
+
+## calculate W_i
+W_primary = ((LMDI_data$EP_primary * LMDI_data$S_primary * LMDI_data$GDP) - (EP_primary_0 * S_primary_0 * GDP_0)) / ((log(LMDI_data$EP_primary * LMDI_data$S_primary * LMDI_data$GDP))-(log(EP_primary_0 * S_primary_0 * GDP_0)))
+
+W_secondary = ((LMDI_data$EP_secondary * LMDI_data$S_secondary * LMDI_data$GDP) - (EP_secondary_0*S_secondary_0*GDP_0))/((log(LMDI_data$EP_secondary * LMDI_data$S_secondary * LMDI_data$GDP))-(log(EP_secondary_0*S_secondary_0*GDP_0)))
+
+W_tertiary = ((LMDI_data$EP_tertiary * LMDI_data$S_tertiary * LMDI_data$GDP)-(EP_tertiary_0*S_tertiary_0*GDP_0))   /   ( (log(LMDI_data$EP_tertiary * LMDI_data$S_tertiary * LMDI_data$GDP))- (log(EP_tertiary_0*S_tertiary_0*GDP_0)))
+
+# calculate three effects for primary industry
+Delta_EC_EP_1 <- W_primary*log(EP_primary/EP_primary_0)
+Delta_EC_S_1 <- W_primary*log(S_primary/S_primary_0)
+Delta_EC_Y_1 <- W_primary*log(LMDI_data$GDP/GDP_0)
+
+# calculate three effects for secondary industry
+Delta_EC_EP_2 <- W_secondary*log(EP_secondary/EP_secondary_0)
+Delta_EC_S_2 <- W_secondary*log(S_secondary/S_secondary_0)
+Delta_EC_Y_2 <- W_secondary*log(LMDI_data$GDP/GDP_0)
+
+# calculate three effects for tertiary industry
+Delta_EC_EP_3 <- W_tertiary*log(EP_tertiary/EP_tertiary_0)
+Delta_EC_S_3 <- W_tertiary*log(S_tertiary/S_tertiary_0)
+Delta_EC_Y_3 <- W_tertiary*log(LMDI_data$GDP/GDP_0)
+
+# summary three industries effect for each year
+Delta_EC_EP = Delta_EC_EP_1 + Delta_EC_EP_2 + Delta_EC_EP_3
+Delta_EC_S = Delta_EC_S_1 + Delta_EC_S_2 + Delta_EC_S_3
+Delta_EC_Y = Delta_EC_Y_1 + Delta_EC_Y_2 + Delta_EC_Y_3
+
+# calculate degree of contribution of different effects for total industrial electricity
+Total_EC = Delta_EC_EP + Delta_EC_S + Delta_EC_Y
+C_EP = Delta_EC_EP / Total_EC
+C_S = Delta_EC_S / Total_EC
+C_Y = Delta_EC_Y/ Total_EC
+
+real_diff <- c(NA,diff(LMDI_data$Total_industry))
+year <- LMDI_data$year
+# create a table to show the analysis result
+total_EC_analysis <- data.frame(year, Total_EC, real_diff,
+                                Delta_EC_EP, C_EP,
+                                Delta_EC_S, C_S,
+                                Delta_EC_Y, C_Y)
+
+
+
+
+```
+
+```{r show the table, echo=FALSE, warning=FALSE}
+kable(total_EC_analysis, caption = 'LMDI decomposition analysis result', align = 'c', digits = 2 )
+
+```
+Table 12 shows the results obtained after LMDI decomposition. **Total_EC** is the estimated total power added value under the LMDI method, **real_diff** is the real power added value. Comparing these two columns, we can see that the gap between the overall predicted value and the true value is small, and we can believe the results of the LMDI decomposition. **Delta_EC_EP**, **Delta_EC_S**, **Delta_EC_Y** represent $\Delta EC_t^{EP}$, $\Delta EC_t^{S}$, $\Delta EC_t^{Y}$respectively, **C_EP**, **C_S**, **C_Y** represent $C_{EP_{t}}$, $C_{S_{t}}$ and $C_{Y_{t}}$.
+
+As can be seen from Table 12, the industrial electricity consumption in Anhui Province has shown a rapid upward trend. After 2000, the annual increase has generally increased, but this number has decreased a lot from 2013 to 2017, and then it has increased rapidly. It was from 2013 that the growth rate of GDP in Anhui Province began to decline, the proportion of the secondary industry in the output value decreased, and the proportion of the output value of the tertiary industry increased. At the same time, the growth rate of GDP and the growth rate of electricity consumption began to deviate greatly. 
+
+```{r create a line plot to descirbe three effects , include=FALSE}
+effects_describe_table <- select(total_EC_analysis, 'year', 'Delta_EC_EP', "Delta_EC_S", "Delta_EC_Y")
+
+effects_describe_table<- melt(effects_describe_table, id.vars = 'year', variable.name = 'Effects')
+
+
+effects_compare_plot <-  ggplot(data = effects_describe_table)+
+  geom_line(mapping = aes(x = year, y = value, color = Effects), alpha = 0.55)+
+   scale_x_continuous(breaks = unique(effects_describe_table$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 5_1: different effects on industrial electricity consumption", )+ 
+  labs(x = 'Year', y = '100 Million  kWh')+
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+
+```
+
+```{r show line plot, echo=FALSE, warning=FALSE}
+effects_compare_plot
+
+```
+
+As can be seen in Figure 5_1, the output effect has been the main driver of electricity consumption growth, and in recent years, it has contributed to more than 1.2 billion kWh of electricity consumption per year. Structure effect contributed to a significant amount of positive electricity consumption from 2004 to 2012. This is because during this period of time, the mining and metallurgical industries in Anhui Province developed rapidly, which on the one hand increased the GDP, and on the other hand led to a large amount of electricity consumption. In the past five years, the contribution of the structure effect to the increase in power consumption first decreased and then increased, but remained at a low level overall speaking, which shows that the industrial structure change in Anhui Province is successful in terms of energy saving, and it also confirms that after the change of the industrial structure, the current economic structure is more green, environmentally friendly and energy-saving. Intensity effect is the main force in reducing power consumption. Since 2004, it has saved a lot of energy consumption for Anhui Province every year until 2017, of which 2015 saved the largest amount of energy consumption, about 7.6 billion kWh. But in recent years, the intensity effect has instead started to increase electricity consumption.  This is also in full compliance with the hypothesis that the effect of technology that Wang W (2010) et al$^{[17]}$ obtained through research and analysis shows an inverted U shape. 
+
+There are many possible reasons. The author believes that with the slowdown of technological development, traditional industries have limited technologies that can improve electricity efficiency, and the marginal cost is high, which makes enterprises lack the will to improve electricity efficiency and reduce costs. 
+
+```{r create bar plot to show effects contribution, include=FALSE}
+effect_contri_table <- select(total_EC_analysis, 'year', 'C_EP', 'C_S', 'C_Y')
+effect_contri_table<- melt(effect_contri_table, id.vars = 'year', variable.name = 'Effects_contribution')
+
+
+effect_contri_plot <-  ggplot(data = effect_contri_table)+
+  geom_bar(mapping = aes(x = year, y = value, fill = Effects_contribution), stat = 'identity', position = 'stack', alpha = 0.55)+
+   scale_x_continuous(breaks = unique(effect_contri_table$year))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Figure 5_2: Effects' contribution to electricity usage", )+ 
+  labs(x = 'Year', y = '(point)')+
+  # https://statisticsglobe.com/change-font-size-of-ggplot2-plot-in-r-axis-text-main-title-legend
+  theme(plot.title = element_text(size=7.5))+
+  theme(axis.text = element_text(size = 5.5))+
+  theme(axis.title = element_text(size = 6.5), legend.text  = element_text(size = 6.5),legend.title = element_text(size = 7))
+
+```
+Figure 5_2 illustrates the impact of various effecs on power growth over the years. Here, instead of using percentages, decimals are used directly for the convenience of readers. Figure 5_2 shows that, in recent years, the output effect and the intensity effect have been the main driving forces for the growth and decline of electricity use, respectively, they are often multiples of the overall effect (which should be 1). The low proportion of structure effect makes the author realize that the industrial transformation of Anhui Province still has a long way to go, because the general trend of society is the continuous growth of GDP, and the output effect will definitely bring about an increase in electricity consumption. However, with the deceleration of technological development, it is difficult for the energy utilization efficiency to increase rapidly in the short term, and the intensity effect will not be able to offset the increase in power consumption caused by the output effect. The transformation of industrial structure has become the focus of low-energy consumption and high-efficiency development.
+
+```{r show the effects contribution plot, echo=FALSE, warning=FALSE}
+effect_contri_plot
+```
+
+##### (2) Three effects of each industry
+Here, this paper lists the contributions of the primary industry, the secondary industry, and the tertiary industry to different effects, and the results are shown in tables 13, 14, and 15.
+
+```{r create tables for effects in terms of 3 industries, include=FALSE}
+C_EP_1  = Delta_EC_EP_1/Total_EC
+C_EP_2 = Delta_EC_EP_2/Total_EC
+C_EP_3 = Delta_EC_EP_3/Total_EC
+
+C_S_1 = Delta_EC_S_1/Total_EC
+C_S_2 = Delta_EC_S_2/Total_EC
+C_S_3 = Delta_EC_S_3/Total_EC
+
+C_Y_1 = Delta_EC_Y_1/Total_EC
+C_Y_2 = Delta_EC_Y_2/Total_EC
+C_Y_3 = Delta_EC_Y_3/Total_EC
+
+Intensity_effect_table <-  data.frame(year, Delta_EC_EP_1, C_EP_1, Delta_EC_EP_2, C_EP_2, Delta_EC_EP_3, C_EP_3)
+
+
+Struct_effect_table <- data.frame(year, Delta_EC_S_1, C_S_1,Delta_EC_S_2,C_S_2,
+                                  Delta_EC_S_3, C_S_3)
+
+Output_effect_table <- data.frame(year, Delta_EC_Y_1, C_Y_1, Delta_EC_Y_2,C_Y_2,Delta_EC_Y_3,C_Y_3)
+
+```
+
+```{r show 3 effects for 3 industries, echo=FALSE, warning=FALSE}
+kable(Intensity_effect_table, caption = 'Intensity effect for all industry', align = 'c', digits = 2 )
+
+kable(Struct_effect_table, caption = 'structure effect for all industry', align = 'c', digits = 2)
+
+kable(Output_effect_table, caption = 'output effect for all industry', align = 'c', digits = 2)
+
+```
+
+It can be seen from Table 13 that the intensity effect of the secondary industry is very small (negative number) for a long period of time, which shows that the improvement of the power utilization efficiency of the secondary industry has made a huge contribution to reducing power consumption. The secondary industry is also a major contributor to the intensity effect. The value of the primary industry was first negative, then continued to rise to positive, and then fluctuated up and down, maintaining a low level. This shows that the improvement of the power utilization efficiency of the primary industry has a relatively stable impact on the total power consumption. The intensity effect of the tertiary industry has maintained a low level until 2018, but it has reached a large value in 2012 and 2018. 
+
+Table 14 shows the impact of structure effects for three industries. The structure effect of the secondary industry on the growth of electricity consumption accounts for a large part of the three industries. The structure effect of the primary industry is always negative, this shows that when the proportion of the secondary industry in the overall GDP increases, electricity consumption will increase rapidly, but if it is the primary industry, the increase in electricity consumption will decrease. It is worth mentioning that the structure effect of the tertiary industry is not obvious, it maintains a low level all year round, and its proportion is also very small.
+
+Table 15 shows the impact of output effect for three industries. The increase in the output value of the secondary industry has a very large impact on the increase in electricity consumption, exceeding the sum of other industries. In terms of time period, its value decreased slightly from 1997 to 2001, and then rose rapidly until 2011. Since 2012, its value has fluctuated around 100. For the tertiary industry, its value has increased since 2004 and has accelerated in recent years. In contrast, the output effect of the primary industry is much smaller than the other two.
+
+### Chapter 6 Explanation for the divergence between GDP growth and electricity use growth
+
+#### (I) Summary of Analysis Results
+This part combines the analysis results of previous chapters to explain the deviation phenomenon.
+
+In chapter 2 figure 2_5, we see that $g_t^{EC}$ and $g_t^y$ were close to each other before 2002, and maintained the same trend and close relationship from 2002 to 2013. After 2013, there has been a significant deviation between $g_t^{EC}$ and $g_t^y$, not only in value, but also in trend. At the same time, in 2012, overall GDP growth began to slow, and this phenomenon is still ongoing. The original industrial structure began to accelerate its transformation,  the proportion of the output value of the secondary industry both in the increased GDP ($K_{2t}$) and in the overall GDP ($S_{2t}$) began to decline. The proportion of the tertiary industry began to increase ($K_{3t}$, $S_{3t}$). 
+
+In Chapter 4, by proving that $g_t^{EC}$ has a cointegration relationship with the explained variable, we construct a time series model with a high degree of explanation (equation 4.1). In the equation, the growth rate of electricity consumption per unit output value of the secondary industry ($g_t^{EP_{2}}$) has the greatest impact on $g_t^{EC}$. An increase in the proportion of tertiary and secondary industries in GDP ($K_{3t}$, $K_{2t}$) will also lead to an increase in electricity consumption. 
+
+In Chapter 5, the output effect is the main driving force of the main power growth, among which the secondary industry is the most obvious, and the tertiary industry is also growing. The intensity effect is the main driving force for delaying the growth of electricity consumption, and the secondary industry accounts for the vast majority, indicating that the improvement of electricity efficiency in the secondary industry is crucial to saving electricity. The intensity effect of the tertiary industry has become more volatile after 2012. On the whole, the effect of structural effects on power growth is not obvious, mainly in the secondary industry.
+
+#### (II) Explanation of the deviation between the growth rate of electricity use and the growth rate of GDP.
+This part mainly uses the previous analysis results such as (eq 4.1, eq 5.3, etc.) and data (table 12, etc.) to analyze the reasons for the deviation before and after (figure 2_5).
+
+##### (1) Before 2002: Began close together
+
+Before 2002, the growth rate of GDP slowed down for a period of time (1993-2001) during which the industrial structure was relatively stable (see Figure 2-3). Although the output value of the secondary industry is larger than that of the industry, the growth rate of each industry is stable. Before 2002, the growth rate of GDP slowed down for a period of time (1993-2001). During this period, the base of output value was small and the industrial structure was relatively stable (see Figure 2_3). Although the output value of the secondary industry is more than that of the industry, the growth rate of each industry is similar (see figure 2-4).
+
+While the output effect is mainly concentrated in the secondary industry, the intensity effect is also mainly concentrated in the secondary industry (shown in tables 15 and 13). This means that when the electricity efficiency of the secondary industry is improved, the output effect and the intensity effect will be patrially offset, and the remaining structural effect is not obvious because the economic structure is relatively stable. 
+
+Combined with Equation 4.1, $g_EP_{it}$ is partial offset by $g_t^y$, $K_{it}$ is not obvious because the structure is relatively stable, the remaining dominant explanatory variable is $g_t^y$, and its coefficient is very large , so make $g_t^{EC}$ close to $g_t^y$ gradually. Equation 5.3 and its results also show that in this period, $Delta EC_t$ is mainly composed of $\Delta EC_{t}^{EP}$ (negative) and $Delta EC_t^{Y} $ (positive), $Delta EC_t$ is relative stable.
+
+##### (2) 2002 -- 2012: Similar stage
+
+It can be seen from figure 2_5 that in this period $g_t^{EC}$ fluctuates up and down around $g_t^y$, the trends and values of the two are very similar, and the connection is very close. During this period, the GDP growth rate began to increase, mainly due to the output value of the secondary industry. The most obvious feature of the entire economic structure is that the proportion of the secondary industry in GDP has increased rapidly, far exceeding that of the primary and tertiary industries.
+
+During this period, the growth rate of electricity consumption was huge. Although the intensity effect was still negative (Table 12), the output effect was too large to be offset, and the structural effect also contributed to a large increase in electricity consumption. Since the secondary industry has both the main intensity effect and the output effect, and the secondary industry also occupies a dominant position in GDP, the growth rate of GDP is highly correlated with the growth rate of the secondary industry. The growth rate of the secondary industry is also related to the high growth rate of electricity consumption, so $g_t^{EC}$ is highly correlated with $g_t^y$. 
+
+Combining eq 4.1 and table 12, we can see that during 2002-2007, the structure effect was positive, and the intensity effect was offset by the structure effect or also positive, causing $g_t^{EC}$ to be greater than $g_t^y$.
+But from 2008 to 2012, $/Delta EC_t^{EP}$ suddenly decreased to about -30, in which $/Delta EC_t^{EP_2}$ also went through this process, making $g^{EP_2}_t$ rapidly decrease, its relatively high coefficient (0.87 in eq 4.1) has a strong weakening effect on $g_t^{EC}$, so $g_t^y$ is greater than $g_t^{EC}$ in this period.
+
+##### (3) 2012 -- now: Deviation
+
+Since 2012, the deviation between $g_t^{EC}$ and $g_t^y$ has become more and more obvious, and sometimes even the opposite trend has appeared. Overall, GDP growth slowed down, but the growth rate of electricity consumption began to fluctuate greatly. 
+
+###### 2013 - 2015
+From 2013-2015, $g^{EC}_t$ decrease more significantly than $g^Y_t$. In terms of industry's GDP, the growth rate of the secondary industry slows down the most. Since 2010, its growth rate has dropped from 20% to 8% in 2018. In contrast, the growth rates of the primary and tertiary industries are relatively stable, remaining at around 4% and 10% respectively. 
+
+As far as the total output effect is concerned, table 12 shows that $\Delta EC_t^Y$ exprience its first numerical decline. In terms of different industries, the secondary industry has the largest decline. In addition, the intensity effect of the secondary industry also reached a trough during this period (-79.99 kWh in 2015), and the total intensity effect also seriously weakened the added value of electricity. Finally, the overall structural effect is also negative during this time period, although the primary and tertiary industries are increasing and the secondary industry is trending downward. According to equation 5.3, we can predict $\Delta EC_t$ is smaller as $\Delta EC_{t}^{EP} < 0$, $\Delta EC_{t}^{S}<0$,  $\Delta EC_t^{Y}$ smaller. Combined with eq 4.1, we can reason that $g_t^{EC} < g_t^{y}$ because the explanatory variables in the model are all decreasing or negative.
+
+
+
+
+
+###### 2015 - 2018
+During this period, the overall trend of $g_t^{EC}$ is to rise and exceed $g_t^{y}$. In terms of industry's GDP, the growth rate of the secondary industry has stabilized at 8% after several years of decline, the primary industry has been fluctuating around 3%, and the tertiary industry has declined slightly.
+
+The aggregate output effect returned to a growing trend. In terms of sub-sectors, the secondary industry has begun to increase, but the growth rate has slowed down. The primary industry floated slightly, and the tertiary industry increased steadily. In terms of output effects, the output effects of the three industries are all positive, and the second industry has the largest increase. In terms of the intensity effect, the secondary industry weakens and its ability to reduce electricity consumption becomes weaker. The value of the tertiary industry is on the rise, reaching a historical high of 3.643 billion kwh, which shows that the electricity efficiency of the tertiary industry is very low. The electricity efficiency of the primary industry has been slightly improved, and the value has been reduced to -296 million kWh. The structural effect shows that the secondary industry has the largest value, followed by the tertiary industry (all positive numbers), and the primary industry is negative.
+
+In general, during this period, the values of the three effects of the secondary industry rebounded, and the intensity effect of the primary industry increased. Although the three effects of the primary industry are reduced, because of its small proportion in GDP, it can be predicted according to eq 5.3:  $\Delta EC_t$ is larger as $\Delta EC_{t}^{EP} > 0$, $\Delta EC_{t}^{S} > 0$,  $\Delta EC_t^{Y}$ larger. Combined with eq 4.1, we can reason that $g_t^{EC} > g_t^{y}$ because the explanatory variables in the model are increaing.
+
+#### (III) In-depth analysis of deviations
+Based on the previous summary, this part further analyzes the deviation problem. In the previous analysis, eq 4.1 explains the relationship between $g_t^{EC}$and $g_t^y$, and also shows the reasons for their deviation through explanatory variables. The decomposition based on LMDI also concretely shows that the power growth is the result of the combined action of three kinds of influences.
+
+In terms of secondary industries, in the two deviations, the change in output effect contributes a large proportion of deviations, which is also in line with the trend of the secondary industry development, its rate has decreasing significantly and then maintain stable. At the same time, the improvement of electricity efficiency in 2015 reach its record. The structural effect increases electricity consumption most of the time, was negative in 2013-2015. The output effect and intensity effect of the secondary industry together contribute a lot for  $g_t^{EC} < g_t^y$ during 2013-2015. When they started to rise in 201, $g_t^{EC}$ quickly exceeded $g_t^y$. 
+
+The tertiary industry has been growing rapidly in recent years. Its output effect has shown steady growth in the two deviations, but the increase is not very obvious. In contrast, its intensity effect on energy consumption in recent years continued to increase, in 2018 reached 3.643 billion KWH, prompting $g_t^{EC}$ increase rapidly. The structural effect of the tertiary industry was negative from 2005 to 2012, but then rose to a positive value and fluctuated up and down. 
+It also increases power consumption during two deviations
+
+The output effect of the primary industry has been limited due to its small output value and low growth rate. Due to the small output value and low growth rate of the primary industry, its output effect has been limited and fluctuates up and down during the deviation period. Its intensity effect experienced a decrease first and then an increase, which also contributed to the deviation of $g_t^{EC}$. It is worth mentioning its structural effect, whose value always fluctuates up and down at - 1 million kwh.
+
+In general, the reason for the deviation from 2013 to 2015 is that the slowdown of GDP growth has weakened the output effect. Among them, the output value of the secondary industry declined the most and experience a strong intensity effect, which offset other effects. During 2015-2018, the output effect of the secondary industry recovered and the intensity effect increased, while the intensity effect of the tertiary industry increased rapidly, making the growth rate of electricity consumption rapidly exceed the GDP growth rate.
+
+### Chapter 7 Enlightenment of this devision
+At present, on a global scale, the three major issues of tight energy demand, industrial restructuring and slowing economic growth combine to test the economic development of various countries. Taking Anhui Province as an example, this paper starts with the deviation between the growth rate of electricity consumption and the growth rate of GDP, and analyzes the reasons for this phenomenon based on the changes in industrial structure and electricity efficiency, hoping to help the future economic development. This chapter divides the author's inspiration into two aspects: industrial structure and power efficiency.
+
+#### (1) Industrial structure
+
+The changes in the industrial structure of Anhui Province over the years are: at the beginning, three industries developed in a balanced way. Subsequently, the proportion of the secondary industry expanded and developed rapidly, while other industries grew steadily. In recent years, the development of the secondary industry has slowed down, the growth of the tertiary industry has accelerated, and the growth of the primary industry has been stable. 
+
+The structural transformation has a obvious effect on the use of electricity. The overall structural effect began to soar in 2005 (the proportion of the secondary industry has increased rapidly since 2003), weakened in 2012, and rebounded in 2016. When the proportion of the secondary industry increases, structural changes will bring huge power consumption. Since 2012, the proportion of the tertiary industry has increased, and the growth rate of the secondary industry has slowed down. This change in the industrial structure has delayed power consumption. 
+
+**Does this mean that increasing the proportion of the tertiary industry can reduce energy consumption?** The answer is **no**. In our analysis, in 2010-2012, the structural effect of the tertiary industry was negative, but after 2016, this value rose to positive. This means that the increase in the proportion of the tertiary industry also consumes more electricity. In 2016, the main driving force really makes the structural effect optimal(-3.37 million kwh) is the secondary industry (-7.70 million kwh). On the contrary, the tertiary industry consumes more electricity (5.42 million kwh). In contrast, the ratio of the primary industry to GDP is stable and provides a stable structural effect, saving 1 million kwh per year.
+
+#### (2) Electricity utilization efficiency
+In this paper, electricity utilization efficiency is measured by electricity consumption per unit output value (structural effect). The higher the efficiency, the less electricity consumption per unit output value, and the structural effect can save more energy consumption. Intensity effect has always been the main force of power saving. 
+
+The intensity effect has experienced many significant rises and falls, all of which are related to the secondary industry. Before 2000, the intensity effect of the secondary industry had reached a peak. During the period of rapid development of the industry from 2002 to 2012, its intensity effect dominated the main electric energy saving effect, in 2015, it reached the lowest level in history, saving about 8 billion kwh of electric energy for Anhui Province. This also partly explains why the structural change of the secondary industry in 2016 is negative: with the improvement of the secondary industry's electricity efficiency, when the ratio of the secondary industry to GDP increases, more electricity can be used more efficiently.
+
+**Is the power utilization efficiency of the secondary industry always the most important part of power saving?** The answer is **no**. Although the secondary industry has a large power consumption and has been improving the efficiency of use, the problem has emerged. The electricity utilization efficiency of the tertiary industry is decreasing, and its intensity effect in 2018 even wasted 3.643 billion kwh. Under the background of accelerated growth of the tertiary industry and increased proportion of the whole industry, this will largely offset the electricity saved by the secondary industry. The improvement of power efficiency in the secondary industry comes from the continuous development of its production technology. However, as the technology encounters a bottleneck, its intensity effect will only save 1.17 million kwh in 2018, lower than primary industry.
+
+#### (3) Future development mode
+
+In the short term, the current economic structure of Anhui Province will still be dominated by the secondary industry, tertiary industry grow faster. In the context of slowing economic growth, the secondary industry still needs a lot of power. In addition to continuing to develop the technology needed to improve efficiency, it is urgent to develop the technology of the tertiary industry to reduce power consumption.
+
+In the long run, the author believes that the industrial structure of Anhui Province needs to be changed slowly. In addition to the development of the tertiary industry, attention should also be paid to the development of the primary industry. The direction of industrial transformation is to establish an environmental economic structure with high output value and low energy consumption. In the future, the power utilization efficiency of the tertiary industry will be the focus, and its development should be vigorously promoted.
+
+
+
+
+
+
+
+
+
+
+
+
 
